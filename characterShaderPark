@@ -1,4 +1,4 @@
-/characterShaderPark
+//characterShaderPark
 let size = 1.0;
 //change colors quickly
 //change vertical horizontal positions character
@@ -12,6 +12,7 @@ let yellow = color(1.9,1.6,0.0);
 let standard = color(1.0, 1.0, 1.0);
 let animation = shape( () => {
 //aviHead
+  displace(0.0, -0.33, 0.0);
 let headAndNeck = shape( () => {
   displace(0.0*size, 0.45*size, 0.20*size);
 let headAndNeckVertical = shape( () => {
@@ -306,7 +307,6 @@ let sd = sphericalDistribution(p,20.0);
  //cheek();
  //teeth();
 });
-
 //aviClothing
 let shirt = shape(() => {
   let p = getSpace();
@@ -361,7 +361,7 @@ let bowInferior = shape( () => {
 });
 let buttons = shape( () => {
   color(1.5,0.0,0.1);
-  displace(0.0,-0.41*size,0.549*size);
+  displace(0.0,0.1*size,0.549*size);
   torus(0.01*size, 0.015*size);
   displace(0.0,-0.049*size,0.042*size);
   torus(0.01*size, 0.015*size);
@@ -384,8 +384,8 @@ let horizontalTorso = shape(() => {
   verticalTorso();
   expand(0.02);
 });
- verticalTorso();
- //horizontalTorso();
+ //verticalTorso();
+ horizontalTorso();
 });
 let limbs = shape( () => {
   let verticalLimbs = shape( () => {
@@ -452,9 +452,10 @@ let horizontalTail = shape( () => {
   //horizontalTail();
 });
 let wings = shape( () => {
+let verticalWings = shape( () => {
   rotateY(0.2*sin(time*4))
   color(1.5,0.0,0.1);
-  displace(0.67*size,-0.55*size,-0.012*size);
+  displace(0.57*size,-0.15*size,-0.012*size);
   let p = getSpace();
   let sd = sphericalDistribution(p,75.0);
   rotateX(PI/0.5);
@@ -474,6 +475,14 @@ let wings = shape( () => {
   displace(0.0,0.35*size, -0.42*size);
   //rotateZ(PI/1);
   torus(0.0-sd.w*0.03*size, 0.2-sd.w*0.09*size);
+});
+let horizontalWings = shape( () => {
+  displace(0.0*size, 0.1*size, 0.5*size);
+  rotateX(PI/3);
+  verticalWings();
+});
+  //verticalWings();
+  horizontalWings();
 });
 let avi = shape( () => {
 let aviHead = shape( () => {
