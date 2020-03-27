@@ -2,14 +2,15 @@
 let size = 1.0;
 //change colors quickly
 //change vertical horizontal positions character
-let dominantColor = color(0.5,0.,0.1);
-let accentColorOne = color(1.5,0.0,0.1);
-let accentColorTwo = color(1.0, 0.5, 1.0);
-let accentColorFour = color(1.0,1.40,2.05);
-let black = color(0.0,0.0, 0.0);
-let white = color(1.0,1.40,2.05);
-let yellow = color(1.9,1.6,0.0);
-let standard = color(1.0, 1.0, 1.0);
+function dominantColor() { color(0.5,0.0,0.1) };
+function accentColorOne() { color(1.5,0.0,0.1)};
+function accentColorTwo() { color(1.0, 0.5, 1.0)};
+function accentColorFour() { color(1.0,1.40,2.05)};
+function black() {color(0.0,0.0, 0.0)};
+function white() {color(1.0,1.40,2.05)};
+function yellow() {color(1.9,1.6,0.0)};
+function standard() {color(1.0, 1.0, 1.0)};
+function brown() {color(0.2,0.1,0.05)};
 let animation = shape( () => {
 //aviHead
   displace(0.0, -0.33, 0.0);
@@ -17,7 +18,7 @@ let headAndNeck = shape( () => {
   displace(0.0*size, 0.45*size, 0.20*size);
 let headAndNeckVertical = shape( () => {
 let head = shape( () => {
-  dominantColor
+  dominantColor();
   let roundHead = shape( () => {
   displace(0.0, 0.0, 0.00);
   //box(0.281, 0.2919, 0.4);
@@ -51,7 +52,7 @@ let neck = shape( () => {
 let collar = shape( () => {
   displace(0.2, 0.12, -0.040);
   rotateY(PI/-12);
-  color(1.0,1.40,2.05);
+  white();
   let p = getSpace();
   let sd = sphericalDistribution(p,240.0);
   displace(-0.20*size, -0.3*size, 0.02*size);
@@ -71,14 +72,14 @@ let collar = shape( () => {
   collar();
 });
 let headAndNeckHorizontal = shape(() => {
-  displace(0.0*size, 0.02*size, 0.370*size);
+  displace(-0.0*size, 0.02*size, 0.370*size);
   //rotateZ(PI/2);
-  rotateY(PI/2);
-  rotateZ(-PI/.48);
+  rotateY(PI/.5);
+  rotateX(PI/7.38);
   headAndNeckVertical();
 });
-  headAndNeckVertical();
-  //headAndNeckHorizontal();
+  //headAndNeckVertical();
+  headAndNeckHorizontal();
 });
 //combine facial features to animate simultaneously
 let facialFeatures = shape( () => {
@@ -119,7 +120,7 @@ let eyeHighlight = shape( () => {
 });
 let eyebrow = shape( () => {
   rotateZ(-0.5);
-  color(0.4,0.1,0.0)
+  accentColorOne();
   displace(0.0, -0.010*sin(time*2), -0.0);
   displace(0.0912*size,0.2943*size,0.3633*size);
   torus(0.056*size, 0.04*size);
@@ -186,7 +187,7 @@ nostrils();
 let snout = shape( () => {
 let snouty = shape( () => {
   rotateZ(PI/2);
-  color(0.2,0.1,0.05);
+  brown();
   displace(-.10, 0.0, 0.60);
   torus(0.035, 0.03391);
   displace(0.010, 0.0, 0.15);
@@ -372,7 +373,7 @@ let buttons = shape( () => {
 //aviBody
 let torso = shape(() => {
 let verticalTorso = shape(() => {
-  dominantColor
+  dominantColor();
   displace(0.0,-0.09*size, 0.2*size);
   box(0.05*size,0.1*size,0.01*size);
   expand(0.349*size);
@@ -420,8 +421,8 @@ let horizontalLimbs = shape( () => {
   rotateY(PI/2);
   verticalLimbs();
 });
-  verticalLimbs();
-  //horizontalLimbs();
+  //verticalLimbs();
+  horizontalLimbs();
 });
 let tail = shape( () => {
 let verticalTail = shape( () => {
