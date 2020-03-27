@@ -1,5 +1,7 @@
+/characterShaderPark
 let size = 1.0;
 //change colors quickly
+//change vertical horizontal positions character
 let dominantColor = color(0.5,0.,0.1);
 let accentColorOne = color(1.5,0.0,0.1);
 let accentColorTwo = color(1.0, 0.5, 1.0);
@@ -181,11 +183,35 @@ let nostrils = shape( () => {
 nostrils();
 });
 let snout = shape( () => {
-let snouty = shape( () =>{ sphere(0.1);});
-let nostrils = shape( () => { sphere(0.1); });
-let mouth = shape( () => { sphere(0.1); });
+let snouty = shape( () => {
+  rotateZ(PI/2);
+  color(0.2,0.1,0.05);
+  displace(-.10, 0.0, 0.60);
+  torus(0.035, 0.03391);
+  displace(0.010, 0.0, 0.15);
+  rotateZ(PI/2);
+let mouth = shape( () => {
+  color(0.6,0.03,0.02);
+  //let s = getSpace();
+  displace(0.0,0.10,-0.1216);
+  torus(0.0102, 0.018);
+  expand(0.03*sin(2*time));
 });
-//snout();
+  mouth();
+let nose = shape( () => {
+  color(0.0,0.0,0.0);
+  //let s = getSpace();
+  displace(0.0,-0.0,0.101);
+  torus(0.0015, 0.00018);
+  //expand(0.02);
+});
+nose();
+  blend(0.2);
+  sphere(0.03);
+});
+ snouty();
+});
+snout();
 beak();
 });
 protrusibleMouth();
