@@ -1,28 +1,31 @@
 //characterShaderPark
-let size = 0.1;
+let size = 0.5;
 //change colors quickly
 //change vertical horizontal positions character
 function dominantColor() { color(0.5,0.0,0.1) };
-function accentColorOne() { color(1.5,0.0,0.1)};
-function accentColorTwo() { color(1.0, 0.5, 1.0)};
-function accentColorFour() { color(1.0,1.40,2.05)};
+function magenta() { color(0.5,0.0,0.1) };
+function hotPink() { color(1.5,0.0,0.1)};
+function lavender() { color(1.0, 0.5, 1.0)};
 function black() {color(0.0,0.0, 0.0)};
 function white() {color(1.0,1.40,2.05)};
 function yellow() {color(1.9,1.6,0.0)};
 function standard() {color(1.0, 1.0, 1.0)};
+function red() {color(1.0, 0.0, 0.0)};
 function brown() {color(0.2,0.1,0.05)};
 function green() {color(0.02,0.245,0.05)};
+function lightGreen() {color(0.2,0.9,0.05)};
 function lightBrown() {color(1.0,0.4,0.03)};
 function lightBlue() {color(0.0,1.9,1.8)};
+function pink () {color(3.0, 0.5, 1.0)};
+function purple () {color(0.1,0.0,0.9)};
 let animation = shape( () => {
 //aviHead
   displace(0.0, -0.33, -0.20);
 let headAndNeck = shape( () => {
-  displace(0.0*size, 0.45*size, 0.20*size);
+  displace(0.0*size, 0.45*size, 0.0*size);
 let headAndNeckVertical = shape( () => {
 let head = shape( () => {
-  //dominantColor();
-  accentColorTwo();
+  pink();
   let roundHead = shape( () => {
   displace(0.0, 0.0, 0.00);
   //box(0.281, 0.2919, 0.4);
@@ -54,14 +57,14 @@ let neck = shape( () => {
   torus(.049*size, 0.180*size);
 });
 let collar = shape( () => {
-  displace(0.2*size, 0.12*size, -0.040*size);
+  displace(0.2*size, 0.12*size, 0.10750*size);
   rotateY(PI/-12);
   white();
   let p = getSpace();
   let sd = sphericalDistribution(p,240.0);
   displace(-0.20*size, -0.3*size, 0.02*size);
   torus(size*.24639-sd.w*0.03, size*0.139-sd.w*0.03);
-  color(.90,1.60,2.5)
+  white();
   blend(0.02*size);
   displace(0.0, 0.02*size, 0.00*size);
   blend(0.02);
@@ -76,29 +79,31 @@ let collar = shape( () => {
   collar();
 });
 let headAndNeckHorizontal = shape(() => {
-  displace(-0.0*size, 0.02*size, 0.370*size);
+  displace(-0.0*size, 0.02*size, 0.45*size);
   //rotateZ(PI/2);
   rotateY(PI/.5);
   rotateX(PI/7.38);
   headAndNeckVertical();
 });
-  //headAndNeckVertical();
+  headAndNeckVertical();
+  mixGeo(abs(sin(time)));
   headAndNeckHorizontal();
 });
 //combine facial features to animate simultaneously
 let facialFeatures = shape( () => {
 let facialFeaturesVertical = shape( () => {
-  displace(0.0, 0.5*size, -0.1320*size);
+  displace(0.0, 0.5*size, 0.0*size);
 let eyeAndBrow = shape( () => {
+   displace(0.0, 0.0*size, -0.20*size);
 let eyes = shape( () => {
 let sclera = shape( () => {
-  color(1.0,1.40,2.05);
+  white();
   displace(0.19*size,0.048*size,0.23*size);
 });
 let iris = shape( () => {
   displace(0.0*size, 0.0*size, -0.030*size);
   rotateZ(-PI/14)
-  color(0.1892,0.091,0.04);
+  lightBlue();
   displace(0.1721*size,0.099*size,0.259*size);
   rotateZ(PI/2);
   torus(0.071*size, 0.081*size);
@@ -108,13 +113,13 @@ let pupil = shape( () => {
   displace(0.20*size, 0.0*size, 0.30*size);
   rotateZ(PI/2);
   torus(0.06*size, 0.109*size);
-  lightBlue();
+  purple();
   displace(0.011*size,-0.009*size,0.089*size);
   sphere(0.105*size);
 });
 let eyeHighlight = shape( () => {
   displace(0.253*size, 0.10*size, 0.4*size);
-  color(1.0, 2.0, 0.0);
+  pink();
   sphere(0.041*size);
   expand(0.02*size);
 });
@@ -125,27 +130,28 @@ let eyeHighlight = shape( () => {
 });
 let eyebrow = shape( () => {
   rotateZ(-0.5);
-  accentColorOne();
+  lightGreen();
   displace(0.0*size, size*-0.010*sin(time*2), -0.0*size);
   displace(0.0912*size,0.2943*size,0.3633*size);
   torus(0.056*size, 0.04*size);
 });
   displace(0.0*size,size*0.05*sin(time*2), 0.20*size);
   eyes();
-  eyebrow();
+  //eyebrow();
 });
  let muzzle = shape( () => {
  let inferiorMouth = shape( () => {
+ displace(0.0*size, 0.0*size, -0.30*size);
 let mouth = shape( () => {
   let lips = shape( () => {
-  color(3.0, 0.5, 2.0);
+  red();
   //let s = getSpace();
-  displace(0.0*size,-0.219*size, 0.299*size);
+  displace(0.0*size,-0.19*size, 0.5*size);
   torus(0.0321*size, 0.0918*size);
   expand(0.0001*size);
    let philtrum = shape( () => {
    color(0.5,0.0,0.1);
-  displace(size*-0.02, 0.0456*size, 0.024*size);
+  displace(size*-0.02, 0.0456*size, 0.24*size);
   torus(0.0374*size, 0.059*size);
   let tongue = shape( () => {
   color(1.0,0.00,0.05);
@@ -170,7 +176,7 @@ nose();
 let protrusibleMouth = shape( () => {
 let beak = shape( () => {
   rotateZ(PI/2);
-  color(1.9,1.6,0.0)
+  yellow();
   displace(-0.042*size, 0.0, 0.5*size);
   torus(0.0735*size, 0.0533*size);
   displace(0.010*size, 0.0*size, 0.215*size);
@@ -193,13 +199,13 @@ let snout = shape( () => {
 let snouty = shape( () => {
   rotateZ(PI/2);
   //brown();
-  accentColorTwo();
+  pink();
   displace(-0.10*size, 0.0*size, 0.60*size);
   torus(0.035*size, 0.033*size);
   displace(0.010*size, 0.0*size, 0.15*size);
   rotateZ(PI/2);
 let mouth = shape( () => {
-  color(0.6,0.03,0.02);
+  purple();
   //let s = getSpace();
   displace(0.0*size,0.10*size,-0.1216*size);
   torus(0.0102*size, 0.018*size);
@@ -223,11 +229,11 @@ snout();
   expand(0.07*size)
 //beak();
 });
-protrusibleMouth();
-//inferiorMouth();
+//protrusibleMouth();
+inferiorMouth();
 });
 let cheek = shape( () => {
-  color(1.0,0.4,0.0);
+  purple();
   displace(0.189*size,-0.05*size,0.41*size);
   //sphere(0.045);
   //displace(0.0,0.0,0.04);
@@ -259,7 +265,7 @@ let maskInferior = shape( () => {
 });
 let ears = shape( () => {
 let outerEar = shape( () => {
-  accentColorOne
+  magenta();
 let outerEarMammal = shape( () => {
   color(0.2,0.1,0.05);
   displace(0.21*size,0.3*size,0.32*size);
@@ -270,6 +276,16 @@ let outerEarMammal = shape( () => {
   color(0.2,0.1,0.05);
   sphere(0.114*size);
 });
+let outerBunnyEar = shape( () => {
+  lavender();
+  displace(0.215*size,0.654*size,-0.087501*size);
+  rotateZ(PI/1.1);
+  rotateX(PI/9);
+  cylinder(0.098*size,.984*size);
+  blend(0.548*size)
+  displace(0.0, 0.10, -0.02*size);
+  sphere(0.179*size);
+});
 let outerFeather = shape( () => {
   displace(0.21*size,0.4*size,0.21*size);
   rotateZ(PI/1.4);
@@ -279,14 +295,26 @@ let outerFeather = shape( () => {
   sphere(0.051*size);
 });
   outerFeather();
-  outerEarMammal();
+  //outerEarMammal();
+  outerBunnyEar();
 });
 let innerEar= shape( () => {
-  //color(1.0, 0.5, 1.0)
-  displace(-0.0*size, -0.02*size, -0.2*size);
+  //lavender();
+  //displace(-0.0*size, -0.02*size, -0.2*size);
   outerEar();
+  let innerBunnyEar= shape( () => {
+  white();
+  displace(0.215*size,0.289*size,0.51*size);
+  rotateZ(PI/1.1);
+  rotateY(PI/3);
+  cylinder(0.076*size,0.289*size);
+  blend(0.432*size);
+  color(1.0,1.40,2.05);
+  sphere(0.0258*size);
+  expand(0.01*size);
 });
- mirrorX();
+
+});
  outerEar();
  innerEar();
 });
@@ -306,23 +334,27 @@ let sd = sphericalDistribution(p,20.0);
   sphere(size*0.25-sd.w*0.1*size);
 });
  //combine facial features to animate simultaneously
- muzzle();
+//muzzle();
  //mask();
  mirrorX();
- eyeAndBrow();
- //ears();
- hair();
+ //eyeAndBrow();
+ ears();
+ //hair();
  //cheek();
  //teeth();
 });
 let facialFeaturesHorizontal = shape( () => {
-  displace(0.0*size, 0.0*size, 0.4*size);
+  displace(0.0*size, 0.0*size, 0.2*size);
   facialFeaturesVertical();
 });
+  facialFeaturesVertical();
+  mixGeo(abs(sin(time)));
   facialFeaturesHorizontal();
-  //facialFeaturesVertical();
+
 });
 //aviClothing
+let clothing = shape( () => {
+let verticalClothing = shape( () => {
 let shirt = shape(() => {
   let p = getSpace();
   let n = noise(140*p)*0.5+0.5;
@@ -332,9 +364,10 @@ let shirt = shape(() => {
   expand(0.349*size);
 });
 let sleeves = shape( () => {
+  mirrorX();
   rotateZ(PI/2);
   displace(-0.44*size,-0.21*size,0.32*size);
-  color(0.2,0.5,0.05);
+  green();
   torus(0.05*size, 0.09*size);
 });
 let necklace = shape( () => {
@@ -342,7 +375,7 @@ let necklace = shape( () => {
    let len = 13;
    let sr = 0.095;
    occlusion(0.3);
-   accentColorOne
+   purple();
    //rotateZ(PI/4);
    for(let i = 1; i <= len; i++ ) {
    let fq = -2*PI*i/len;
@@ -360,9 +393,10 @@ let necklace = shape( () => {
   necklaces();
 });
 let bow = shape( () => {
+   mirrorX();
 let bowSuperior = shape( () => {
   rotateZ(PI/3);
-  color(1.0,.0,0.0);
+  red();
   displace(0.50*size, -0.102*size, -0.120*size);
   torus(0.130*size, 0.1*size);
 });
@@ -375,7 +409,7 @@ let bowInferior = shape( () => {
   bowInferior();
 });
 let buttons = shape( () => {
-  color(1.5,0.0,0.1);
+  white();
   displace(0.0,0.1*size,0.549*size);
   torus(0.01*size, 0.015*size);
   displace(0.0,-0.049*size,0.042*size);
@@ -384,10 +418,19 @@ let buttons = shape( () => {
   torus(0.0091*size, 0.01*size);
   expand(0.02);
 });
+});
+  let horizontalClothing = shape( () => {
+  displace(0.0*size, 0.0*size, 0.4*size);
+  verticalClothing();
+});
+ verticalClothing();
+ mixGeo(abs(sin(time)));
+ horizontalClothing();
+});
 //aviBody
 let torso = shape(() => {
 let verticalTorso = shape(() => {
-  accentColorTwo();
+  pink();
   displace(0.0,-0.09*size, 0.2*size);
   box(0.05*size,0.1*size,0.01*size);
   expand(0.349*size);
@@ -399,13 +442,14 @@ let horizontalTorso = shape(() => {
   verticalTorso();
   expand(0.02*size);
 });
- //verticalTorso();
+ verticalTorso();
+ mixGeo(abs(sin(time)));
  horizontalTorso();
 });
 let limbs = shape( () => {
   let verticalLimbs = shape( () => {
   let arms = shape( () => {
-  lightBlue();
+  pink();
   rotateZ(PI/1);
   let p = getSpace();
   let sd = sphericalDistribution(p,175.0);
@@ -435,21 +479,21 @@ let horizontalLimbs = shape( () => {
   rotateY(PI/2);
   verticalLimbs();
 });
-  //verticalLimbs();
+  verticalLimbs();
+  mixGeo(abs(sin(time)));
   horizontalLimbs();
 });
 let tail = shape( () => {
 let verticalTail = shape( () => {
   rotateZ(0.03*sin(time*6));
   rotateY(0.01*sin(time*6));
-  lightBlue();
+  purple();
   displace(0.0, size*-0.1, size*-0.21098);
   rotateY(PI/2);
   rotateZ(-PI/1.14);
   cylinder(size*0.038,size*0.194);
   expand(size*0.051);
   blend(0.26*size);
-  lightBlue();
   sphere(size*0.0915);
   expand(0.021*size);
   lightBlue();
@@ -463,7 +507,8 @@ let horizontalTail = shape( () => {
   displace(0.0, 0.3*size, -0.010*size);
   verticalTail();
 });
-  //verticalTail();
+  verticalTail();
+  mixGeo(abs(sin(time)));
   horizontalTail();
 });
 let wings = shape( () => {
@@ -478,7 +523,7 @@ let verticalWings = shape( () => {
   rotateY(PI/5);
   cylinder(0.09*size,0.22*size);
   blend(0.26*size);
-  color(0.5,0.0,0.1);
+  lightBlue();
    sphere(size*0.13-sd.w*0.1*size);
   rotateX(PI/1.9);
   torus(size*0.125-sd.w*0.043*size, size*0.0571-sd.w*0.01*size);
@@ -486,7 +531,7 @@ let verticalWings = shape( () => {
   //rotateZ(PI/1);
   torus(size*0.25-sd.w*0.03*size, size*0.1-sd.w*0.09*size);
   //wing subtract
-  color(1.0, 0.5, 1.0);
+  white();
   displace(0.0,0.35*size, -0.42*size);
   //rotateZ(PI/1);
   torus(0.2*size-sd.w*0.03*size, size*0.2-sd.w*0.09*size);
@@ -497,7 +542,7 @@ let horizontalWings = shape( () => {
   verticalWings();
 });
   //verticalWings();
-horizontalWings();
+//horizontalWings();
 });
 let avi = shape( () => {
 let aviHead = shape( () => {
@@ -506,12 +551,7 @@ let aviHead = shape( () => {
   mirrorX();
   });
 let aviClothing = shape( () => {
- //bow();
- //necklace
- buttons();
- //shirt();
- //mirrorX();
- //sleeves();
+ clothing();
  });
 let aviBody = shape( () => {
  torso();
